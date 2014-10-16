@@ -6,7 +6,6 @@ import java.util.List;
 
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.monteiro.calculadora.model.Calculador;
 import br.com.monteiro.calculadora.model.OperacaoEnum;
 
 @Resource
@@ -15,7 +14,6 @@ public class CalculadoraController {
 	private Result result;
 	
 	public CalculadoraController(Result result) {
-		super();
 		this.result = result;
 		result.include("operacoes", getListOperacao());
 	}
@@ -25,9 +23,8 @@ public class CalculadoraController {
 	public void calcula(OperacaoEnum operacao, Integer valor1, Integer valor2){
 		Integer resultado = 0;
 		String mensagem = "";
-		Calculador calc = operacao.retornaOperacao();
-		resultado = calc.calcula(valor1, valor2);
-		mensagem = montaMensagem(calc, valor1, valor2, resultado);
+		resultado = operacao.calcula(valor1, valor2);
+		mensagem = montaMensagem(operacao, valor1, valor2, resultado);
 		result.include("mensagem", mensagem);
 		result.of(this).formulario();
 	}
@@ -40,7 +37,7 @@ public class CalculadoraController {
 		return lista;
 	}
 	
-	private String montaMensagem(Calculador calc, Integer valor1, Integer valor2, Integer resultado){
-		return "A " + calc.toString() + " dos valores ( "+valor1+" , "+ valor2+" ) é igual a "+resultado;
+	private String montaMensagem(OperacaoEnum operacao, Integer valor1, Integer valor2, Integer resultado){
+		return "A " + operacao.toString() + " dos valores ( "+valor1+" , "+ valor2+" ) é igual a "+resultado;
 	}
 }

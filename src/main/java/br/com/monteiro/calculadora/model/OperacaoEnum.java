@@ -2,26 +2,47 @@ package br.com.monteiro.calculadora.model;
 
 public enum OperacaoEnum {
 	SOMAR{
-		public Calculador retornaOperacao(){
-			return new Soma();
+		public Integer calcula(Integer valor1, Integer valor2){
+			Integer resultado = valor1 + valor2;
+			return resultado;
 		};
+		
+		public String toString(){
+			return "Soma";
+		}
 	},
 	SUBTRAIR{
-		public Calculador retornaOperacao(){
-			return new Subtrai();
+		public Integer calcula(Integer valor1, Integer valor2){
+			Integer resultado = valor1 - valor2;
+			return resultado;
 		};
+		
+		public String toString(){
+			return "Subtração";
+		}
 	},
 	MULTIPLICAR{
-		public Calculador retornaOperacao(){
-			return new Multiplica();
+		public Integer calcula(Integer valor1, Integer valor2){
+			Integer resultado = valor1 * valor2;
+			return resultado;
 		};
+		
+		public String toString(){
+			return "Multiplicação";
+		}
 	},
 	DIVIDIR{
-		public Calculador retornaOperacao(){
-			return new Divide();
+		public Integer calcula(Integer valor1, Integer valor2){
+			Integer resultado = valor1 / valor2;
+			return resultado;
 		};
+		
+		public String toString(){
+			return "Divisão";
+		}
 	};
 	
-	public abstract Calculador retornaOperacao();
+	public abstract Integer calcula(Integer valor1, Integer valor2);
+	public abstract String toString();
 	
 }
